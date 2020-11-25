@@ -2964,9 +2964,14 @@ summary {
 <p>Regression models tell us about the effect of predictor variables on the response variable, but to find out the effect of specific predictors on the response, we need to look at linear and non-linear combinations. Consider a regression model with response variable y and predictor variables x1, x2, x3 and x4. The regression model (without interactions) is:</p>
 <p><span class="math display">\[y = \alpha + \beta1*x1 + \beta2*x2 + \beta3*x3 + \beta4*x4\]</span></p>
 <p>If we want to make inferences about the effect x1 and x2 have on y, we need to create a linear combination of those variables</p>
+<<<<<<< HEAD
+<p><span class="math inline">\(y_{lc} = exp(\alpha + \beta1*x1 + \beta2*x2)\)</span></p>
+<p>Of course just an estimate by itself doesn’t tell us much, so we need to calculate standard errors, confidence intervals and p-values to know whether the effect is positive or negative and statistically significant. We can interpret the difference <span class="math inline">\(exp(lc1) - exp(lc2)\)</span> as the difference in expected value of the response variable (suicide count in this case), where <span class="math inline">\(lc1\)</span> and <span class="math inline">\(lc2\)</span> are linear combinations of the predictor variables</p>
+=======
 <p><span class="math display">\[y_{lc} = \beta1*x1 + \beta2*x2\]</span></p>
 <p>Of course just an estimate by itself doesn’t tell us much, so we need to calculate standard errors, confidence intervals and p-values to know whether the effect is positive or negative and statistically significant. Since the Poisson regression using a log-link function, the coefficients returned are log relative risk, we can interpret the difference <span class="math inline">\(exp(lc1) - exp(lc2)\)</span> as the difference in expected value of the response variable (suicide count in this case), where <span class="math inline">\(lc1\)</span> and <span class="math inline">\(lc2\)</span> are linear combinations of the predictor variables.</p>
 <p>Similarly, we can interpret the nonlinear combination of regression coefficients, <span class="math inline">\(exp(\beta1/\beta2)\)</span> as the ratio of the expected value of the response variable, where <span class="math inline">\(\beta1\)</span> and <span class="math inline">\(\beta2\)</span> are regression coefficients. We can also have nonlinear transformation like <span class="math inline">\(exp(\beta1 * \beta2)\)</span> as the product of the coefficients.</p>
+>>>>>>> upstream/main
 </div>
 <div id="why-is-it-useful" class="section level2">
 <h2><strong>Why is it useful?</strong></h2>
@@ -3346,8 +3351,12 @@ poisson count ib1.age_group ib1.gender ib2015.year gdp, exposure(population) irr
 </div>
 <div id="non-linear-combination-of-coefficient-1" class="section level4">
 <h4>Non-linear Combination of Coefficient:</h4>
+<<<<<<< HEAD
+<p>We may also curious about the non linear combinations such as products or ratio of two coefficients. We can use <code>nlcom</code> function. The notation <code>_b[name]</code> is the standard way in Stata to refer to regression coefficients. We can give the combination a name showing as below: I named this combination as <code>E_product</code> followed by a comma and then the expression.</p>
+=======
 <p>We may also curious about the non-linear combinations such as products or ratios of two coefficients. We can use <code>nlcom</code> function. It takes nonlinear transformations of the estimated parameter vector from some fitted model and applies the delta method to calculate the variance, standard error, Wald test statistic, etc., of the transformations.</p>
 <p>The notation <code>_b[name]</code> is the standard way in Stata to refer to regression coefficients. We can give the combination a name showing as below: I named this combination as <code>E_product</code> followed by a comma and then the expression.</p>
+>>>>>>> upstream/main
 <pre class="stata"><code>** Coefficient estimates of male * year_2015
 poisson count ib2.age_group i.gender i.year gdp, exposure(population) irr
 nlcom (E_product: exp(_b[1.gender] * _b[2005.year] ))</code></pre>
@@ -3362,6 +3371,8 @@ nlcom (E_ratio: exp(_b[2000.year] / _b[2010.year]))</code></pre>
 </div>
 <div id="conclusiondiscussion" class="section level1">
 <h1><strong>Conclusion/Discussion</strong></h1>
+<<<<<<< HEAD
+=======
 <p>There are some slight differences in the standard errors of the non-linear combinations between R and Python; this is most likely because R used the msm package’s “deltamethod” function, while Python did the calculation manually. However, the differences are negligible (&lt;0.005) and the estimates are the same.</p>
 <p>From the examples presented in the three parallel sections, we can now draw some conclusions based on the linear combination of coefficients obtained by Possion regression model. First, males of 25-34 years old were less likely to commit suicide in 2015 compared to 10 years ago. Second, in 2015, males had higher suicide counts compared to females when they are both 35-54 years old. Finally, in 2015, males of 75+ years old had higher suicide counts than males of 5-14 years old.</p>
 <p>The non-linear combination of coefficient using ratio indicates that the suicide counts in 2010 were less than 2000. Besides, the interaction of males group and year 2005 results in a noticeable increase in the suicide counts.</p>
@@ -3372,6 +3383,7 @@ nlcom (E_ratio: exp(_b[2000.year] / _b[2010.year]))</code></pre>
 <p><code>lincom</code> manual in Stata: <a href="https://www.stata.com/manuals13/rlincom.pdf#rlincom" class="uri">https://www.stata.com/manuals13/rlincom.pdf#rlincom</a></p>
 <p><code>nlcom</code> manual in Stata: <a href="https://www.stata.com/manuals13/rnlcom.pdf" class="uri">https://www.stata.com/manuals13/rnlcom.pdf</a></p>
 <p>Inferences on Linear Combinations of Coefficients in R: <a href="https://murraylax.org/econometrics/notes/regression_lincom.pdf" class="uri">https://murraylax.org/econometrics/notes/regression_lincom.pdf</a></p>
+>>>>>>> upstream/main
 </div>
 
 

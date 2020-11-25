@@ -14,6 +14,15 @@ output:
 # **Introduction**
 
 ## **Topic concepts**
+Regression models tell us about the effect of predictor variables on the response variable, but to find out the effect of specific predictors on the response, we need to look at linear and non-linear combinations. Consider a regression model with response variable y and predictor variables x1, x2, x3 and x4. The regression model (without interactions) is:
+
+$y = \alpha + \beta1*x1 + \beta2*x2 + \beta3*x3 + \beta4*x4$
+
+If we want to make inferences about the effect x1 and x2 have on y, we need to create a linear combination of those variables
+
+$y_{lc} = \beta1*x1 + \beta2*x2$
+
+
 Regression models tell us about the effect of predictor variables on the response 
 variable, but to find out the effect of specific predictors on the response, we 
 need to look at linear and non-linear combinations. Consider a regression model 
@@ -583,13 +592,6 @@ poisson count ib1.age_group ib1.gender ib2015.year gdp, exposure(population) irr
 
 #### Non-linear Combination of Coefficient:
 
-We may also curious about the non-linear combinations such as products or ratios
-of two coefficients. We can use `nlcom` function. It takes nonlinear transformations of the
-estimated parameter vector from some fitted model and applies the delta method to calculate the variance,
-standard error, Wald test statistic, etc., of the transformations.
-
-The notation `_b[name]` is the standard way in Stata to refer to regression coefficients. 
-We can give the combination a name showing as below: I named this combination as `E_product` 
 followed by a comma and then the expression.
 
 ```{stata nonlinear_1, echo = TRUE, eval = FALSE}
@@ -610,6 +612,7 @@ nlcom (E_ratio: exp(_b[2000.year] / _b[2010.year]))
 ![](https://github.com/aravind1338/506F20GroupProject/blob/main/STATA/Results/n_2.png?raw=true){width=450px}
 
 # **Conclusion/Discussion**
+
 
 There are some slight differences in the standard errors of the non-linear 
 combinations between R and Python; this is most likely because R used the msm 
